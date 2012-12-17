@@ -400,6 +400,9 @@ echo "    EOfono test........: $have_edbus_ofono_test"
 echo "    EUkit test.........: $have_edbus_ukit_test"
 echo
 echo "Documentation..........: ${build_doc}"
+if test "x${build_doc}" = "xyes" ; then
+echo "    Installation.......: make install-doc"
+fi
 echo
 echo "Compilation............: make (or gmake)"
 echo "  CPPFLAGS.............: $CPPFLAGS"
