@@ -11,8 +11,6 @@ doc-clean:
 
 doc-build: all
 	$(efl_doxygen)
-	cp img/* html/
-	cp img/* latex/
 
 doc: doc-build
 	rm -rf $(PACKAGE_DOCNAME).tar*
