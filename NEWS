@@ -1,4 +1,10 @@
-E_dbus 1.7.3
+E_dbus 1.7.4
+
+Changes since E_dbus 1.7.3:
+---------------------------
+
+   * Add XML output to doc
+   * Add installation rule for doc
 
 Changes since E_dbus 1.7.2:
 ---------------------------
