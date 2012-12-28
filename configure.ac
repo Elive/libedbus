@@ -88,7 +88,6 @@ requirement_ehal="edbus >= 1.6.99"
 requirement_enotify="edbus >= 1.6.99"
 requirement_eofono="edbus >= 1.6.99"
 requirement_eukit="edbus >= 1.6.99"
-requirement_dbus="dbus-1 >= 0.62"
 
 ### Additional options to configure
 
@@ -146,12 +145,19 @@ EFL_CHECK_DOXYGEN([build_doc="yes"], [build_doc="no"])
 
 ### Checks for libraries
 
+# Evil library for compilation on Windows
+
+case "$host_os" in
+   mingw*)
+      PKG_CHECK_EXISTS([evil >= 1.6.99])
+      AC_DEFINE([HAVE_EVIL], [1], [Set to 1 if Evil package is installed])
+      requirement_edbus="${requirement_edbus} evil >= 1.6.99"
+   ;;
+esac
+
 PKG_CHECK_MODULES([DBUS], [dbus-1 >= 0.62])
-dbus_libs="$DBUS_LIBS"
-dbus_cflags="$DBUS_CFLAGS"
-AC_SUBST(dbus_libs)
-AC_SUBST(dbus_cflags)
-PKG_CHECK_MODULES([EDBUS], [ecore >= 1.6.99 eina >= 1.6.99 dbus-1 >= 0.62])
+
+PKG_CHECK_MODULES([EDBUS], [${requirement_edbus}])
 
 # Find out the version of DBUS we're using
 dbus_version=`pkg-config --modversion dbus-1`
@@ -337,7 +343,6 @@ AC_SUBST(requirement_ehal)
 AC_SUBST(requirement_enotify)
 AC_SUBST(requirement_eofono)
 AC_SUBST(requirement_eukit)
-AC_SUBST(requirement_dbus)
 
 AC_OUTPUT([
 e_dbus.spec
