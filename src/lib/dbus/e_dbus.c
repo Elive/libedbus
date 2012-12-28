@@ -7,6 +7,10 @@
 #include <string.h>
 #include <stdbool.h>
 
+#ifdef HAVE_EVIL
+# include <Evil.h>
+#endif
+
 #include "e_dbus_private.h"
 
 static E_DBus_Version _version = { VMAJ, VMIN, VMIC, VREV };
