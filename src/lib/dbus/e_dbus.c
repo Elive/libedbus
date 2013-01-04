@@ -27,6 +27,7 @@ static int connection_slot = -1;
 
 static int _edbus_init_count = 0;
 static int close_connection = 0;
+EAPI int E_DBUS_DOMAIN_GLOBAL = 0;
 EAPI int E_DBUS_EVENT_SIGNAL = 0;
 
 static E_DBus_Connection *shared_connections[2] = {NULL, NULL};
@@ -596,7 +597,7 @@ e_dbus_init(void)
       return --_edbus_init_count;
     }
 
-
+  E_DBUS_DOMAIN_GLOBAL = _e_dbus_log_dom;
   E_DBUS_EVENT_SIGNAL = ecore_event_type_new();
   e_dbus_object_init();
 

@@ -1,4 +1,9 @@
-E_dbus 1.7.4
+E_dbus 1.7.5
+
+Changes since E_dbus 1.7.4:
+---------------------------
+
+   * API consistency fix from Jérémy Zurcher
 
 Changes since E_dbus 1.7.3:
 ---------------------------
