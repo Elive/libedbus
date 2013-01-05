@@ -1,5 +1,12 @@
 E_dbus 1.7.5
 
+Changes since E_dbus 1.7.5:
+---------------------------
+
+Fixes:
+
+   * Fix missing returns.
+
 Changes since E_dbus 1.7.4:
 ---------------------------
 

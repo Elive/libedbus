@@ -1378,7 +1378,7 @@ _e_connman_element_get_properties_callback(void *user_data, DBusMessage *msg, DB
 Eina_Bool
 e_connman_element_sync_properties_full(E_Connman_Element *element, E_DBus_Method_Return_Cb cb, const void *data)
 {
-   e_connman_element_properties_sync_full(element, cb, data);
+   return e_connman_element_properties_sync_full(element, cb, data);
 }
 
 /**

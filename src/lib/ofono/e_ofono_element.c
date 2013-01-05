@@ -1458,7 +1458,7 @@ _e_ofono_element_get_properties_callback(void *user_data, DBusMessage *msg, DBus
 Eina_Bool
 e_ofono_element_sync_properties_full(E_Ofono_Element *element, E_DBus_Method_Return_Cb cb, const void *data)
 {
-   e_ofono_element_properties_sync_full(element, cb, data);
+   return e_ofono_element_properties_sync_full(element, cb, data);
 }
 
 /**
