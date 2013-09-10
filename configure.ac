@@ -2,7 +2,7 @@
 ##--##--##--##--##--##--##--##--##--##--##--##--##--##--##--##--##
 m4_define([v_maj], [1])
 m4_define([v_min], [7])
-m4_define([v_mic], [8])
+m4_define([v_mic], [9])
 m4_define([v_rev], m4_esyscmd([(svnversion "${SVN_REPO_PATH:-.}" | grep -v '\(export\|Unversioned directory\)' || echo 0) | awk -F : '{printf("%s\n", $1);}' | tr -d ' :MSP\n']))
 m4_if(v_rev, [0], [m4_define([v_rev], m4_esyscmd([git log 2> /dev/null | (grep -m1 git-svn-id || echo 0) | sed -e 's/.*@\([0-9]*\).*/\1/' | tr -d '\n']))])
 ##--   When released, remove the dnl on the below line
@@ -81,13 +81,13 @@ case "$host_os" in
       ;;
 esac
 
-requirement_ebluez="edbus >= 1.7.8"
-requirement_econnman0_7x="edbus >= 1.7.8"
-requirement_edbus="ecore >= 1.7.8 eina >= 1.7.8 dbus-1 >= 0.62"
-requirement_ehal="edbus >= 1.7.8"
-requirement_enotify="edbus >= 1.7.8"
-requirement_eofono="edbus >= 1.7.8"
-requirement_eukit="edbus >= 1.7.8"
+requirement_ebluez="edbus >= 1.7.9"
+requirement_econnman0_7x="edbus >= 1.7.9"
+requirement_edbus="ecore >= 1.7.9 eina >= 1.7.9 dbus-1 >= 0.62"
+requirement_ehal="edbus >= 1.7.9"
+requirement_enotify="edbus >= 1.7.9"
+requirement_eofono="edbus >= 1.7.9"
+requirement_eukit="edbus >= 1.7.9"
 
 ### Additional options to configure
 
@@ -149,9 +149,9 @@ EFL_CHECK_DOXYGEN([build_doc="yes"], [build_doc="no"])
 
 case "$host_os" in
    mingw*)
-      PKG_CHECK_EXISTS([evil >= 1.7.8])
+      PKG_CHECK_EXISTS([evil >= 1.7.9])
       AC_DEFINE([HAVE_EVIL], [1], [Set to 1 if Evil package is installed])
-      requirement_edbus="${requirement_edbus} evil >= 1.7.8"
+      requirement_edbus="${requirement_edbus} evil >= 1.7.9"
    ;;
 esac
 
@@ -185,8 +185,8 @@ AC_SUBST(DBUS_VERSION_CFLAGS)
 # Dependencies for the libraries
 if test "x${enable_enotify}" = "xyes" ; then
    PKG_CHECK_MODULES([EVAS],
-      [evas >= 1.7.8],
-      [requirement_enotify="evas >= 1.7.8 ${requirement_enotify}"],
+      [evas >= 1.7.9],
+      [requirement_enotify="evas >= 1.7.9 ${requirement_enotify}"],
       [enable_enotify="no"])
 fi
 
@@ -213,70 +213,70 @@ EFL_ENABLE_BIN([edbus-async-test], ["yes"])
 
 if test "x${have_edbus_test}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_TEST],
-      [ecore >= 1.7.8 dbus-1 >= 0.62],
+      [ecore >= 1.7.9 dbus-1 >= 0.62],
       [have_edbus_test="yes"],
       [have_edbus_test="no"])
 fi
 
 if test "x${have_edbus_test_client}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_TEST_CLIENT],
-      [ecore >= 1.7.8 dbus-1 >= 0.62],
+      [ecore >= 1.7.9 dbus-1 >= 0.62],
       [have_edbus_test_client="yes"],
       [have_edbus_test_client="no"])
 fi
 
 if test "x${have_edbus_bluez_test}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_BLUEZ_TEST],
-      [ecore >= 1.7.8 eina >= 1.7.8 dbus-1 >= 0.62],
+      [ecore >= 1.7.9 eina >= 1.7.9 dbus-1 >= 0.62],
       [have_edbus_bluez_test="yes"],
       [have_edbus_bluez_test="no"])
 fi
 
 if test "x${have_edbus_connman0_7x_test}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_CONNMAN0_7X_TEST],
-      [ecore >= 1.7.8 eina >= 1.7.8 dbus-1 >= 0.62],
+      [ecore >= 1.7.9 eina >= 1.7.9 dbus-1 >= 0.62],
       [have_edbus_connman0_7x_test="yes"],
       [have_edbus_connman0_7x_test="no"])
 fi
 
 if test "x${have_edbus_notification_daemon_test}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_NOTIFICATION_DAEMON_TEST],
-      [ecore >= 1.7.8 evas >= 1.7.8 eina >= 1.7.8 dbus-1 >= 0.62],
+      [ecore >= 1.7.9 evas >= 1.7.9 eina >= 1.7.9 dbus-1 >= 0.62],
       [have_edbus_notification_daemon_test="yes"],
       [have_edbus_notification_daemon_test="no"])
 fi
 
 if test "x${have_edbus_notify_send}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_NOTIFY_SEND],
-      [ecore >= 1.7.8 evas >= 1.7.8 eina >= 1.7.8 dbus-1 >= 0.62],
+      [ecore >= 1.7.9 evas >= 1.7.9 eina >= 1.7.9 dbus-1 >= 0.62],
       [have_edbus_notify_send="yes"],
       [have_edbus_notify_send="no"])
 fi
 
 if test "x${have_edbus_notify_test}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_NOTIFY_TEST],
-      [ecore >= 1.7.8 ecore-evas >= 1.7.8 evas >= 1.7.8 eina >= 1.7.8 dbus-1 >= 0.62],
+      [ecore >= 1.7.9 ecore-evas >= 1.7.9 evas >= 1.7.9 eina >= 1.7.9 dbus-1 >= 0.62],
       [have_edbus_notify_test="yes"],
       [have_edbus_notify_test="no"])
 fi
 
 if test "x${have_edbus_ofono_test}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_OFONO_TEST],
-      [ecore >= 1.7.8 eina >= 1.7.8 dbus-1 >= 0.62],
+      [ecore >= 1.7.9 eina >= 1.7.9 dbus-1 >= 0.62],
       [have_edbus_ofono_test="yes"],
       [have_edbus_ofono_test="no"])
 fi
 
 if test "x${have_edbus_ukit_test}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_UKIT_TEST],
-      [ecore >= 1.7.8 eina >= 1.7.8 dbus-1 >= 0.62],
+      [ecore >= 1.7.9 eina >= 1.7.9 dbus-1 >= 0.62],
       [have_edbus_ukit_test="yes"],
       [have_edbus_ukit_test="no"])
 fi
 
 if test "x${have_edbus_performance_test}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_PERFORMANCE_TEST],
-      [ecore >= 1.7.8 eina >= 1.7.8 dbus-1 >= 0.62 ecore-evas >= 1.7.8 elementary >= 1.7.8 evas >= 1.7.8],
+      [ecore >= 1.7.9 eina >= 1.7.9 dbus-1 >= 0.62 ecore-evas >= 1.7.9 elementary >= 1.7.9 evas >= 1.7.9],
       [have_edbus_performance_test="yes"],
       [have_edbus_performance_test="no"])
 fi
@@ -285,7 +285,7 @@ AM_CONDITIONAL([BUILD_EDBUS_PERFORMANCE_TEST], [test "x${have_edbus_performance_
 
 if test "x${have_edbus_async_test}" = "xyes" ; then
    PKG_CHECK_MODULES([EDBUS_ASYNC_TEST],
-      [ecore >= 1.7.8 dbus-1 >= 0.62],
+      [ecore >= 1.7.9 dbus-1 >= 0.62],
       [have_edbus_async_test="yes"],
       [have_edbus_async_test="no"])
 fi
