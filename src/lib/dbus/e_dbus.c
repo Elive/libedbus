@@ -186,9 +186,8 @@ e_dbus_connection_new(DBusConnection *conn)
 }
 
 static void
-e_dbus_connection_free(void *data)
+e_dbus_connection_free(E_DBus_Connection *cd)
 {
-  E_DBus_Connection *cd = data;
   Ecore_Fd_Handler *fd_handler;
   Ecore_Timer *timer;
   DBG("e_dbus_connection free!");
@@ -488,7 +487,7 @@ e_dbus_connection_setup(DBusConnection *conn)
   dbus_connection_set_exit_on_disconnect(cd->conn, EINA_FALSE);
   dbus_connection_allocate_data_slot(&connection_slot);
 
-  dbus_connection_set_data(cd->conn, connection_slot, (void *)cd, e_dbus_connection_free);
+  dbus_connection_set_data(cd->conn, connection_slot, (void *)cd, NULL);
   dbus_connection_set_watch_functions(cd->conn,
                                       cb_watch_add,
                                       cb_watch_del,
@@ -550,6 +549,7 @@ e_dbus_connection_close(E_DBus_Connection *conn)
 
   dbus_connection_close(conn->conn);
   dbus_connection_unref(conn->conn);
+  e_dbus_connection_free(conn);
 
   // Note: the E_DBus_Connection gets freed when the dbus_connection is cleaned up by the previous unref
 }
@@ -613,6 +613,19 @@ e_dbus_shutdown(void)
      }
    if (--_edbus_init_count)
     return _edbus_init_count;
+
+   // FIXME: this is workaround
+   while  (shared_connections[DBUS_BUS_SESSION] &&
+           shared_connections[DBUS_BUS_SESSION]->refcount >= 1)
+     {
+        e_dbus_connection_close(shared_connections[DBUS_BUS_SESSION]);
+     }
+   // FIXME: this is workaround
+   while (shared_connections[DBUS_BUS_SYSTEM] &&
+          shared_connections[DBUS_BUS_SYSTEM]->refcount >= 1)
+     {
+        e_dbus_connection_close(shared_connections[DBUS_BUS_SYSTEM]);
+     }
 
   e_dbus_object_shutdown();
   ecore_shutdown();
